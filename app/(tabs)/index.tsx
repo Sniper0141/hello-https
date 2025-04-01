@@ -5,6 +5,7 @@ export default function HomeScreen() {
   return (
     <View>
       <Button title='Send request' onPress={onClick}></Button>
+      {buttonActivated === false && <Image src='./../../assets/loading.gif'/>}
     </View>
   );
 }
