@@ -56,7 +56,12 @@ export default function HomeScreen() {
     <View style={styles.button}>
       <Button title='Send request' onPress={onClick}/>
       {buttonActivated === false && <ActivityIndicator/>}
-      {response?.currentDateTime !== "" && <Text style={{color: "white"}}>Time: {response?.currentDateTime}</Text>}
+      {response?.currentDateTime !== "" && 
+        <Text style={{color: "white"}}>
+          Response: {'\n\n'}
+          {response?.currentDateTime}
+        </Text>
+      }
     </View>
   );
 }
