@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, View, Button, ActivityIndicator } from 'react-native';
+import { Image, StyleSheet, Platform, View, Button, ActivityIndicator, Alert } from 'react-native';
 import { useState } from 'react';
 
 let buttonActivated: boolean;
@@ -30,17 +30,32 @@ function onClick(){
   setButtonActivated(false);
 
   const currentDateTime = Date.now();
-
-  fetch("https://httpbin.org/post", {
-    method: "POST",
-    body: JSON.stringify({
-      "currentDateTime": currentDateTime,
-      "platform": window.navigator.platform
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
+  try{
+    const response = fetch("https://httpbin.org/post", {
+      method: "POST",
+      body: JSON.stringify({
+        "currentDateTime": currentDateTime,
+        "platform": window.navigator.platform
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
+    console.log("Request sent!");
+  }
+  catch(e){
+    let errorMessage = "Failed to send request. ";
+    if (e instanceof Error){
+      errorMessage += "Error message: " + e.message;
     }
-  });
+    console.log(errorMessage);
+
+    Alert.alert("Sorry, something went wrong", "Failed to send the request.", [
+      {
+        text: "Alright"
+      }
+    ])
+  }
 
   setButtonActivated(true);
 }
