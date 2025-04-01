@@ -1,9 +1,10 @@
 import { Image, StyleSheet, Platform, View, Button } from 'react-native';
+import { useState } from 'react';
 
 export default function HomeScreen() {
   return (
     <View>
-      <Button title='Send request' onPress={() => alert('button klicked!')}></Button>
+      <Button title='Send request' onPress={onClick}></Button>
     </View>
   );
 }
@@ -27,16 +28,27 @@ const styles = StyleSheet.create({
   },
 });
 
+const [buttonActivated, setButtonActivated] = useState(true)
+
 function onClick(){
+  if(buttonActivated === false){
+    return;
+  }
+
+  setButtonActivated(false);
+
   const currentDateTime = Date.now();
 
   fetch("https://httpbin.org/post", {
     method: "POST",
     body: JSON.stringify({
-      currentDateTime: currentDateTime,
+      "currentDateTime": currentDateTime,
+      "platform": window.navigator.platform
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8"
     }
-  })
+  });
+
+  setButtonActivated(true);
 }
