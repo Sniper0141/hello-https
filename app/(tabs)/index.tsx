@@ -50,8 +50,6 @@ export default function HomeScreen() {
     setButtonActivated(true);
   }
 
-
-
   return (
     <View style={styles.button}>
       <Button title='Send request' onPress={onClick}/>
