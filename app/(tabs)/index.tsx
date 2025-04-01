@@ -1,35 +1,26 @@
-import { Image, StyleSheet, Platform, View, Button } from 'react-native';
+import { Image, StyleSheet, Platform, View, Button, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 
+let buttonActivated: boolean;
+let setButtonActivated: Function;
+
 export default function HomeScreen() {
+  
+  [buttonActivated, setButtonActivated] = useState(true)
+  
   return (
-    <View>
-      <Button title='Send request' onPress={onClick}></Button>
-      {buttonActivated === false && <Image src='./../../assets/loading.gif'/>}
+    <View style={styles.button}>
+      <Button title='Send request' onPress={onClick}/>
+      {buttonActivated === false && <ActivityIndicator/>}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+  button: {
+    paddingTop: 100,
+  }
 });
-
-const [buttonActivated, setButtonActivated] = useState(true)
 
 function onClick(){
   if(buttonActivated === false){
