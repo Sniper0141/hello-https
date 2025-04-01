@@ -8,16 +8,6 @@ export default function HomeScreen() {
   );
 }
 
-function onClick(){
-  fetch("https://httpbin.org/post", {
-    method: "POST",
-    body: "Hello HTTPS World!!!",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-}
-
 const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
@@ -36,3 +26,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
+
+function onClick(){
+  const currentDateTime = Date.now();
+
+  fetch("https://httpbin.org/post", {
+    method: "POST",
+    body: JSON.stringify({
+      currentDateTime: currentDateTime,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+}
